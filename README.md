@@ -1,108 +1,29 @@
 # DroneRL
-Controlling Drones with RL:
-Drone control involves addressing challenges related to stability, navigation, and obstacle avoidance, making RL a natural fit for developing intelligent control systems. RL enables drones to learn from trial and error, continually refining their control policies to adapt to changing conditions. The agent (drone) interacts with an environment, receives feedback in the form of rewards or penalties, and updates its policy accordingly.
+Reinforcement Learning for Drone and Manipulator Control
 
-PPO, a state-of-the-art RL algorithm, has shown remarkable performance in various control tasks. Its core strength lies in efficiently optimizing complex policies while ensuring stable learning. PPO mitigates the risk of catastrophic policy changes, making it suitable for applications where safety is paramount.
+This repository explores the application of Reinforcement Learning (RL), specifically Proximal Policy Optimization (PPO), for controlling drones and manipulators in dynamic environments. The utilization of RL algorithms enables the autonomous agents to learn adaptive control policies through interactions with their surroundings.
 
-PPO Algorithm Overview:
-Proximal Policy Optimization is a policy optimization algorithm that directly optimizes the policy of an agent, parameterized by a neural network. At its core, PPO maximizes the expected cumulative reward while enforcing a constraint on the policy update to prevent drastic policy changes. This constraint is expressed through the objective function:
+## Controlling Drones with RL
 
-�
-(
-�
-)
-=
-�
-[
-min
-⁡
-(
-�
-�
-(
-�
-)
-�
-�
-,
-clip
-(
-�
-�
-(
-�
-)
-,
-1
-−
-�
-,
-1
-+
-�
-)
-�
-�
-)
-]
-L(θ)=E[min(r 
-t
-​
- (θ)A 
-t
-​
- ,clip(r 
-t
-​
- (θ),1−ϵ,1+ϵ)A 
-t
-​
- )]
+Drones pose unique challenges in terms of stability, navigation, and obstacle avoidance, making them an ideal candidate for RL-based control systems. RL allows drones to learn from experience, continually refining their control policies based on feedback from the environment. In this context, the Proximal Policy Optimization (PPO) algorithm stands out for its efficiency in optimizing complex policies while ensuring stability during the learning process.
 
-Where:
+## PPO Algorithm Overview
 
-�
-θ represents the policy parameters.
-�
-�
-(
-�
-)
-r 
-t
-​
- (θ) is the probability ratio between the new policy and the old policy.
-�
-�
-A 
-t
-​
-  is the advantage function, representing the discounted sum of future rewards.
-The objective function ensures that the policy update does not deviate significantly from the previous policy, mitigating the risk of diverging during training.
+Proximal Policy Optimization is a state-of-the-art RL algorithm designed for policy optimization, particularly suitable for scenarios where safety is a critical concern. The algorithm directly optimizes the policy of an agent parameterized by a neural network. The core objective is to maximize the expected cumulative reward while enforcing a constraint on the policy update. The algorithm achieves this through a surrogate objective function:
 
-Application to Manipulators:
-Extending RL to manipulators involves addressing the challenges of high-dimensional state and action spaces. Manipulators, with multiple degrees of freedom, require advanced control strategies to achieve precise and efficient movements. PPO, with its capacity to handle continuous action spaces, is well-suited for manipulator control.
+\[ L(\theta) = \mathbb{E}\left[\min\left(r_t(\theta)A_t, \text{clip}(r_t(\theta), 1 - \epsilon, 1 + \epsilon)A_t\right)\right] \]
 
-In the context of manipulators, the policy network outputs continuous control signals, allowing the manipulator to perform intricate and precise movements. The algorithm's inherent stability ensures smooth convergence and adaptability to varying environmental conditions.
+- \( \theta \): Policy parameters.
+- \( r_t(\theta) \): Probability ratio between the new and old policies.
+- \( A_t \): Advantage function representing the discounted sum of future rewards.
+- \( \epsilon \): Clipping parameter.
 
-Mathematical Rigor of PPO:
-PPO's mathematical formulation involves intricate aspects of policy optimization. The policy update is achieved through a surrogate objective function, balancing the trade-off between policy improvement and stability. The clipping mechanism in the objective function limits the extent of policy changes, fostering more controlled and reliable learning.
+PPO's formulation ensures stability and controlled learning by preventing significant deviations from the previous policy.
 
-The probability ratio 
-�
-�
-(
-�
-)
-r 
-t
-​
- (θ) plays a pivotal role in shaping the policy update. By constraining this ratio, PPO achieves a compromise between exploring new policies and exploiting existing knowledge. The advantage function 
-�
-�
-A 
-t
-​
-  guides the optimization process by providing a measure of the quality of chosen actions relative to the expected value.
+## Application to Manipulators
 
-In summary, Proximal Policy Optimization serves as a robust and effective tool for training autonomous agents, including drones and manipulators. Its mathematical foundation, emphasizing stable policy updates and efficient exploration, makes it a cornerstone in the realm of reinforcement learning for control applications. As technology advances, the fusion of RL and robotic systems promises to usher in an era of intelligent, adaptive machines capable of mastering complex tasks in dynamic environments.
+Expanding RL to manipulators involves addressing challenges related to high-dimensional state and action spaces. Manipulators, with multiple degrees of freedom, demand advanced control strategies for precise movements. PPO's capability to handle continuous action spaces makes it well-suited for manipulator control. The policy network outputs continuous control signals, enabling manipulators to perform intricate and precise movements with inherent stability.
+
+## Mathematical Rigor of PPO
+
+PPO's mathematical foundation involves a nuanced understanding of policy optimization. The surrogate objective function strikes a balance between policy improvement and stability, achieved through the clipping mechanism. The probability ratio \( r_t(\theta) \) and advantage function \( A_t \) play crucial roles in shaping the policy update, providing controlled exploration and exploitation.
